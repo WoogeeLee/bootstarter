@@ -70,4 +70,7 @@ collation_server
 character는 utf8mb4 / collation는 utf8mb4_general_ci로 변경
 utf8mb4는 이모지가 가능
 max_connections 150
+마지막으로 DB인스턴스 수정으로 파라미터 그룹 변경 - 즉시 적용
+반영이 제대로 안되면 작업 -> 재부팅
+
 
