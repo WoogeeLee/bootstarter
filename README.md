@@ -97,4 +97,9 @@ $ mysql -u gogojet86 -p -h RDB호스트
 # EC2 프로젝트 클론 받기
 $ sudo yum install git
 
+$ git --version
+
+$ mkdir ~/app && mkdir ~/app/step1
+
+$ cd ~/app/step1
 
