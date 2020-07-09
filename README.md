@@ -161,3 +161,13 @@ echo "> JAR NAME: $JAR_NAME"
 
 nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 &
 
+=========================
+
+$ vim /home/ec2-user/app/application-oauth.properties
+
+로컬의 설정 옮겨서 저장 후
+
+$ vim deply.sh
+
+nohup java -jar \ -Dspring.config.location=classpath:/application.properties,/home/ec2-user/app/application-oauth.properties \ $REPOSITORY/$JAR_NAME 2>&1 &
+
