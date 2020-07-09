@@ -42,3 +42,32 @@ $ sudo vim /etc/hosts
 $ curl woogee-springboot2-webservice
 curl: (7) Failed to connect to woogee-springboot2-webservice port 80: Connection refused
 나오는지 확인
+
+# AWS RDB
+
+할당 스토리지 20G
+퍼블릭 액세스 가능 : 예
+대시 안되는부분만 언더바로 변경하고 쭉 생성
+
+세팅
+타임존
+캐릭터셋
+Max Connection
+
+좌측 - 파라미터 그룹
+파라미터 그룹 생성
+내가 생성한 DB 버전으로 woogee-springboot2-webservice 그룹 생성
+파라미터 그룹 들어가서 파라미터 편집
+time_zone : Asia/Seoul
+character_set_client
+character_set_connection
+character_set_database
+character_set_filesystem
+character_set_results
+character_set_server
+collation_connection
+collation_server
+character는 utf8mb4 / collation는 utf8mb4_general_ci로 변경
+utf8mb4는 이모지가 가능
+max_connections 150
+
