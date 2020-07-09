@@ -6,3 +6,5 @@
 # 그래들 버전 다운그레이드
 # alt + f12
 # > gradlew wrapper --gradle-version 4.10.2
+# https://console.cloud.google.com/
+# https://developer.naver.com/apps/#/register?api=nvlogin
