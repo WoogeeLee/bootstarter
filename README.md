@@ -73,4 +73,28 @@ max_connections 150
 마지막으로 DB인스턴스 수정으로 파라미터 그룹 변경 - 즉시 적용
 반영이 제대로 안되면 작업 -> 재부팅
 
+데이터베이스 보안 그룹 선택
+EC2에 사용된 보안그룹의 그룹ID 복사
+복사된 보안 그룹의 ID와 본인의 IP를 RDS 보안 그룹의 인바운드로 추가
+
+인텔리제이 Database에서 엔트포인트로 접속
+캐릭터셋 등 잘 적용되었는지 확인
+
+show variables like 'c%';
+
+ALTER DATABASE woogee_springboot2_webservice
+CHARACTER SET = 'utf8mb4'
+COLLATE = 'utf8mb4_general_ci';
+
+select @@time_zone, now();
+
+EC2에서 RDS로 접근 확인
+
+$ sudo yum install mysql
+$ mysql -u gogojet86 -p -h RDB호스트
+비밀번호 입력하고 접속
+
+# EC2 프로젝트 클론 받기
+$ sudo yum install git
+
 
