@@ -169,5 +169,6 @@ $ vim /home/ec2-user/app/application-oauth.properties
 
 $ vim deply.sh
 
-nohup java -jar \ -Dspring.config.location=classpath:/application.properties,/home/ec2-user/app/application-oauth.properties \ $REPOSITORY/$JAR_NAME 2>&1 &
+nohup java -jar -Dspring.config.location=classpath:/application.properties,/home/ec2-user/app/application-oauth.properties $REPOSITORY/$JAR_NAME 2>&1 &
 
+(ㅅㅂ 역슬래시 필요없네..)
