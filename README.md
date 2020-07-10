@@ -536,9 +536,12 @@ set $service_url http://127.0.0.1:8080;
 
 sudo vim /etc/nginx/nginx.conf
 
-location 위에 아래와 같이 추가
+location 위에 아래와 같이 추가 및 변경
 
-include /etc/nginx/conf.d/service-url.inc;
+        include /etc/nginx/conf.d/service-url.inc;
+
+        location / {
+            proxy_pass $service_url;
 
 그 다음 nginx 재시작
 
@@ -582,3 +585,9 @@ $ tail -f /opt/codedeploy-agent/deployment-root/deployment-logs/codedeploy-agent
 확인하니 jar 파일 못찾음 appspec.yml 에
 
 step3 으로 변경
+
+profile.sh에서 값을 가져올 때 반환하는 기능이 없기 때문에 중간에 echo를 사용해서는 안된다.
+
+stop.sh 에 중괄호 / 소괄호 오타로 포트를 못가져왔다.
+
+nginx에도 재수정
