@@ -233,3 +233,20 @@ notifications:
   email:
     recipients:
       - jojoldu@gmail.com
+      
+아놔 실행권한이 또 없댄다.
+
+야믈파일에 아래를 추가하거나
+
+before_install:
+  - chmod +x gradlew
+
+git에서 아래와 같이 실행한다.
+
+git update-index --chmod=+x gradlew
+
+git ls-tree HEAD
+
+git commit -m "permission access for travis"
+
+
