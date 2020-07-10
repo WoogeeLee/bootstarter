@@ -488,8 +488,91 @@ hooks:
 
 또 안된다..
 
+deploy 파일 오타 ㅋㅋㅋ
 
+/opt/codedeploy-agent/deployment-root/ 내의 로그와
+codedeploy 자체의 이벤트로그를 통해 발견했다.
 
+# 무중단 배포
 
+대표적으로 AWS의 블루/그린, Docker를 이용한 배포가 있다.
 
+여기서는 nginx를 이용한 무중단 배포를 해보도록 한다.
 
+nginx 1대와 jar 2대를 사용
+
+$ sudo yum install nginx
+
+$ sudo service nginx start
+
+EC2 보안규칙에 80포트 추가
+
+구글/네이버 oauth에 8080 포트 제거
+
+$ sudo vim /etc/nginx/nginx.conf
+
+location 항목에 다음과 같이 추가
+
+        location / {
+            proxy_pass http://localhost:8080;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+        }
+
+$ sudo service nginx restart
+
+프로파일 컨트롤러 및 테스트 구성
+
+application-real1,real2 프로퍼티 파일 생성
+server.port=8081
+server.port=8082
+
+sudo vim /etc/nginx/conf.d/service-url.inc
+
+다음과 같이 추가
+
+set $service_url http://127.0.0.1:8080;
+
+sudo vim /etc/nginx/nginx.conf
+
+location 위에 아래와 같이 추가
+
+include /etc/nginx/conf.d/service-url.inc;
+
+그 다음 nginx 재시작
+
+$ sudo service nginx restart
+
+# 배포 스크립트 작성
+
+$ mkdir ~/app/step3 && mkdir ~/app/step3/zip
+
+appspec.yml 수정
+
+files:
+  - source: /
+    destination: /home/ec2-user/app/step3/zip/
+    overwrite: yes
+
+hooks:
+  AfterInstall:
+    - location: stop.sh
+      timeout: 60
+      runas: ec2-user
+  ApplicationStart:
+    - location: start.sh
+      timeout: 60
+      runas: ec2-user
+  ValidateService:
+    - location: health.sh
+      timeout: 60
+      runas: ec2user
+      
+start.sh, stop.sh, profile.sh, health.sh, switch.sh 추가 후 적용
+
+버전 값이 겹치지 않도록 하기 위해 build.gradle에 수정
+
+version '1.0.1-SNAPSHOT'+new Date().format("yyyyMMddHHmmss")
+
+그 후 최종버전 커밋
