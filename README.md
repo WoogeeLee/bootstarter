@@ -202,4 +202,34 @@ CREATE TABLE SPRING_SESSION_ATTRIBUTES (
                                            CONSTRAINT SPRING_SESSION_ATTRIBUTES_FK FOREIGN KEY (SESSION_PRIMARY_ID) REFERENCES SPRING_SESSION(PRIMARY_ID) ON DELETE CASCADE
 ) ENGINE=InnoDB ROW_FORMAT=DYNAMIC;
 
+# Travis CI 배포 자동화
 
+https://travis-ci.org/
+
+깃헙으로 로그인 후, Settings 
+
+올릴 프로젝트를 활성화
+
+야믈파일 설정 - 그래들 파일과 같은 위치에
+
+language: java
+jdk:
+  - openjdk8
+
+branches:
+  only:
+    - master
+
+#Travis CI 서버의 Home
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
+
+script: "./gradlew clean build"
+
+#CI 실행 완료시 메일로 알람
+notifications:
+  email:
+    recipients:
+      - jojoldu@gmail.com
