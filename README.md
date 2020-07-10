@@ -576,3 +576,9 @@ start.sh, stop.sh, profile.sh, health.sh, switch.sh 추가 후 적용
 version '1.0.1-SNAPSHOT'+new Date().format("yyyyMMddHHmmss")
 
 그 후 최종버전 커밋
+
+$ tail -f /opt/codedeploy-agent/deployment-root/deployment-logs/codedeploy-agent-deployments.log
+
+확인하니 jar 파일 못찾음 appspec.yml 에
+
+step3 으로 변경
