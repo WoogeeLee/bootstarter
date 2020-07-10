@@ -591,3 +591,25 @@ profile.sh에서 값을 가져올 때 반환하는 기능이 없기 때문에 �
 stop.sh 에 중괄호 / 소괄호 오타로 포트를 못가져왔다.
 
 nginx에도 재수정
+
+# 1인 개발시 유용한 것들
+
+댓글
+
+Disqus, LiveRe, Utterance
+
+외부서비스 연동
+
+Zapier, IFTTT
+
+방문자 분석
+
+구글 애널리틱스
+
+CDN
+
+클라우드플레어
+
+이메일마케팅
+
+Mailchimp
