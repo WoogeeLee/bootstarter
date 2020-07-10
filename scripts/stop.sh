@@ -6,7 +6,7 @@ source ${ABSDIR}/profile.sh
 
 IDLE_PORT=${find_idle_port}
 
-echo "> $IDLE_PORT 에서 구동중인 application pid 확인"
+echo "> ${IDLE_PORT} 에서 구동중인 application pid 확인"
 
 IDLE_PID=$(sudo lsof -ti tcp:${IDLE_PORT})
 

@@ -5,16 +5,12 @@ function find_idle_profile()
 {
   RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/profile)
 
-  echo "> RESPONSE_CODE : ${RESPONSE_CODE}"
-
   if [ "${RESPONSE_CODE}" -ge 400 ] # 400 보다 크면 - 즉 에러로 보고 real2 사용
   then
     CURRENT_PROFILE=real2
   else
     CURRENT_PROFILE=$(curl -s http://localhost/profile)
   fi
-
-  echo "> CURRENT_PROFILE: ${CURRENT_PROFILE}"
 
   if [ "${CURRENT_PROFILE}" == real1 ]
   then
@@ -23,7 +19,7 @@ function find_idle_profile()
     IDLE_PROFILE=real1
   fi
 
-  echo "> IDLE_PROFILE: ${IDLE_PROFILE}"
+  echo "${IDLE_PROFILE}"
 }
 
 #쉬고 있는 profile의 port 찾기
