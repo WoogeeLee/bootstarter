@@ -233,3 +233,69 @@ notifications:
   email:
     recipients:
       - jojoldu@gmail.com
+      
+아놔 실행권한이 또 없댄다.
+
+야믈파일에 아래를 추가하거나
+
+before_install:
+  - chmod +x gradlew
+
+git에서 아래와 같이 실행한다.
+
+git update-index --chmod=+x gradlew
+
+git ls-tree HEAD
+
+git commit -m "permission access for travis"
+
+# AWS Key 발급
+
+IAM 사용자 추가
+
+woogee-travis-deploy
+
+프로그래밍 방식 액세스
+
+기존정책 직접연결
+
+s3full 검색, CodeDeployFull 검색해서 2개 추가 - 실제 서비스에서는 둘을 별도로 관리하기도 함
+
+태그는 Name 정도 추가 / woogee-travis-deploy
+
+확인 후 사용자 생성
+
+그후 생성된 액세스 키 ID / 비밀 액세스 키를 travis에 등록
+
+(More options > Settings > Environment Variables)
+
+AWS_ACCESS_KEY , AWS_SECRET_KEY 를 Name으로 등록
+
+# AWS S3 생성
+
+버킷 이름 woogee-springboot2-build	
+
+별다른 변경 없이 쭉 생성 - 퍼블릭 액세스 차단 (어차피 IAM으로 접근하므로)
+
+그 후 travis 야믈파일에 아래와 같
+before_deploy:
+  - zip -r woogee-springboot2-webservice *
+  - mkdir -p deploy
+  - mv woogee-springboot2-webservice.zip deploy/woogee-springboot2-webservice.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # travis settings 설정
+    secret_access_key: $AWS_SECRET_KEY # travis settings 설정
+    bucket: woogee-springboot2-build # S3 버킷
+    region: ap-northeast-2 # 버킷 위치
+    skip_cleanup: true
+    acl: private # zip 파일 접근을 private로
+    local_dir: deploy # before_deploy에서 생성한 디렉토리
+    wait-until-deployed: true이 설정 추가
+
+
+
+
+
+
